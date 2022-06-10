@@ -2,7 +2,7 @@ function createGrid(height, width){
     let container = document.querySelector('.container');
     container.style.display = "flex";
     container.style.height = "100vh";
-    container.style.minHeight = "800px";
+    container.style.minHeight = "50px";
     container.style.flexDirection = "column";
     let temp;
     for(let i = 0; i<height; i++){
@@ -16,13 +16,11 @@ function createGrid(height, width){
     rows.forEach(row => {
         for(let i = 0; i<width; i++){
             temp = document.createElement('div');
-            temp.style.border = "2px solid black";
+            temp.style.border = "1px solid black";
             temp.style.aspectRatio = "1/1";
             temp.style.flex = "0 0 auto";
             row.appendChild(temp);
-            temp.addEventListener('mouseover', function (e){
-                this.style.backgroundColor = "red";
-            });
+            temp.addEventListener('mouseover', gradualShade);
         }
     });
 }
@@ -33,6 +31,21 @@ function newGrid(){
     container.replaceChildren();
     gridSize = Number(input.value);
     createGrid(gridSize, gridSize);
+}
+
+function monoBlack(){
+    this.style.backgroundColor = "black";
+}
+function gradualShade(){
+    if(this.style.backgroundColor != "black"){
+        this.style.backgroundColor = "black";
+        this.style.opacity = "0";
+    }
+    this.style.opacity = `${+this.style.opacity + 0.1}`;
+}
+
+function changeStyle(){
+
 }
 
 button = document.querySelector("button");
